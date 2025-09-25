@@ -2,7 +2,12 @@ import { useState, useEffect } from 'react';
 import { Menu, X, GraduationCap, Globe } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
-const Navigation = () => {
+interface NavigationProps {
+  activeSection: string;
+  onSectionChange: (section: string) => void;
+}
+
+const Navigation = ({ activeSection, onSectionChange }: NavigationProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [language, setLanguage] = useState('en');
   const [scrolled, setScrolled] = useState(false);
@@ -16,17 +21,16 @@ const Navigation = () => {
   }, []);
 
   const navItems = [
-    { href: '#home', label: 'Home' },
-    { href: '#chat', label: 'Chat' },
-    { href: '#courses', label: 'Courses' },
-    { href: '#guidance', label: 'Guidance' },
-    { href: '#faqs', label: 'FAQs' },
-    { href: '#contact', label: 'Contact' },
+    { id: 'home', label: 'Home' },
+    { id: 'chat', label: 'Chat' },
+    { id: 'courses', label: 'Courses' },
+    { id: 'guidance', label: 'Guidance' },
+    { id: 'faqs', label: 'FAQs' },
+    { id: 'contact', label: 'Contact' },
   ];
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    element?.scrollIntoView({ behavior: 'smooth' });
+  const handleSectionChange = (sectionId: string) => {
+    onSectionChange(sectionId);
     setIsOpen(false);
   };
 
@@ -50,12 +54,16 @@ const Navigation = () => {
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
               <button
-                key={item.href}
-                onClick={() => scrollToSection(item.href)}
-                className="text-muted-foreground hover:text-foreground transition-smooth relative group"
+                key={item.id}
+                onClick={() => handleSectionChange(item.id)}
+                className={`text-muted-foreground hover:text-foreground transition-smooth relative group ${
+                  activeSection === item.id ? 'text-foreground' : ''
+                }`}
               >
                 {item.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-primary transition-all duration-300 group-hover:w-full" />
+                <span className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-primary transition-all duration-300 ${
+                  activeSection === item.id ? 'w-full' : 'w-0 group-hover:w-full'
+                }`} />
               </button>
             ))}
             
@@ -96,9 +104,11 @@ const Navigation = () => {
           <div className="py-4 space-y-2 border-t border-border">
             {navItems.map((item) => (
               <button
-                key={item.href}
-                onClick={() => scrollToSection(item.href)}
-                className="block w-full text-left px-4 py-3 text-muted-foreground hover:text-foreground hover:bg-secondary rounded-lg transition-smooth"
+                key={item.id}
+                onClick={() => handleSectionChange(item.id)}
+                className={`block w-full text-left px-4 py-3 text-muted-foreground hover:text-foreground hover:bg-secondary rounded-lg transition-smooth ${
+                  activeSection === item.id ? 'text-foreground bg-secondary' : ''
+                }`}
               >
                 {item.label}
               </button>

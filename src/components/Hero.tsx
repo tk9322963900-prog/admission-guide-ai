@@ -1,9 +1,13 @@
 import { MessageCircle, Sparkles, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-const Hero = () => {
+interface HeroProps {
+  onNavigateToChat?: () => void;
+}
+
+const Hero = ({ onNavigateToChat }: HeroProps) => {
   const scrollToChat = () => {
-    document.querySelector('#chat')?.scrollIntoView({ behavior: 'smooth' });
+    onNavigateToChat?.();
   };
 
   return (
@@ -57,7 +61,7 @@ const Hero = () => {
           <div className="animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
             <Button
               size="lg"
-              onClick={scrollToChat}
+              onClick={onNavigateToChat}
               className="bg-gradient-primary hover:shadow-floating transition-all duration-300 transform hover:scale-105 px-8 py-6 text-lg font-semibold group"
             >
               <MessageCircle className="w-5 h-5 mr-2 group-hover:animate-glow" />
