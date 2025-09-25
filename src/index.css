@@ -2,41 +2,62 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Futuristic College Admission Assistant Design System */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
+    /* Futuristic Color Palette */
+    --background: 223 47% 7%;              /* Deep navy #0A0E27 */
+    --foreground: 210 40% 98%;             /* Almost white */
+    
+    --card: 224 44% 12%;                   /* Darker navy card #1A1F3A */
+    --card-foreground: 210 40% 98%;
+    
+    --popover: 224 44% 12%;
+    --popover-foreground: 210 40% 98%;
+    
+    --primary: 217 91% 60%;                /* Electric blue #2563eb */
     --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
+    
+    --secondary: 225 39% 21%;              /* Medium navy */
+    --secondary-foreground: 210 40% 98%;
+    
+    --muted: 225 39% 15%;                  /* Dark muted */
+    --muted-foreground: 215 20% 65%;
+    
+    --accent: 188 95% 43%;                 /* Cyan accent #06b6d4 */
+    --accent-foreground: 223 47% 7%;
+    
+    --success: 142 76% 36%;                /* Green success */
+    --success-foreground: 210 40% 98%;
+    
+    --warning: 43 96% 56%;                 /* Yellow warning #eab308 */
+    --warning-foreground: 223 47% 7%;
+    
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
+    
+    --border: 225 39% 21%;
+    --input: 225 39% 15%;
+    --ring: 217 91% 60%;
+    
+    --radius: 0.75rem;
+    
+    /* Custom Design Tokens */
+    --glass-bg: 224 44% 12% / 0.7;         /* Glassmorphism background */
+    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%), hsl(188 95% 43%));
+    --gradient-card: linear-gradient(145deg, hsl(224 44% 12%), hsl(225 39% 15%));
+    --gradient-hero: radial-gradient(ellipse at top, hsl(217 91% 60% / 0.3), transparent 50%);
+    
+    /* Shadows */
+    --shadow-glass: 0 8px 32px hsl(217 91% 60% / 0.1);
+    --shadow-card: 0 4px 24px hsl(223 47% 7% / 0.4);
+    --shadow-floating: 0 12px 40px hsl(217 91% 60% / 0.15);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --sidebar-background: 0 0% 98%;
 
@@ -101,5 +122,103 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
   }
+}
+
+@layer components {
+  /* Glass morphism effect */
+  .glass {
+    background: hsl(var(--glass-bg));
+    backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--border));
+  }
+  
+  /* Gradient backgrounds */
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+  
+  .gradient-card {
+    background: var(--gradient-card);
+  }
+  
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+  
+  /* Floating animation */
+  .floating {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  /* Hover glow effect */
+  .hover-glow {
+    transition: var(--transition-smooth);
+  }
+  
+  .hover-glow:hover {
+    box-shadow: var(--shadow-floating);
+    transform: translateY(-2px);
+  }
+  
+  /* Chat bubble styles */
+  .chat-bubble-user {
+    @apply ml-auto max-w-[80%] rounded-2xl rounded-br-md bg-primary px-4 py-2 text-primary-foreground;
+  }
+  
+  .chat-bubble-ai {
+    @apply mr-auto max-w-[80%] rounded-2xl rounded-bl-md bg-card px-4 py-2 text-card-foreground border border-border;
+  }
+}
+
+@layer utilities {
+  /* Custom shadow utilities */
+  .shadow-glass {
+    box-shadow: var(--shadow-glass);
+  }
+  
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+  
+  .shadow-floating {
+    box-shadow: var(--shadow-floating);
+  }
+  
+  /* Transition utilities */
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+  
+  .transition-bounce {
+    transition: var(--transition-bounce);
+  }
+}
+
+/* Custom animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes slideInFromRight {
+  0% { transform: translateX(100%); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInFromLeft {
+  0% { transform: translateX(-100%); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  0% { transform: translateY(30px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
 }
