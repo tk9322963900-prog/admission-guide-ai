@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, GraduationCap } from 'lucide-react';
+import { Menu, X, GraduationCap, Globe } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [language, setLanguage] = useState('en');
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -56,6 +58,26 @@ const Navigation = () => {
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-primary transition-all duration-300 group-hover:w-full" />
               </button>
             ))}
+            
+            {/* Language Selector */}
+            <Select value={language} onValueChange={setLanguage}>
+              <SelectTrigger className="w-32 bg-background/50 border-border">
+                <Globe className="w-4 h-4 mr-2" />
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="en">English</SelectItem>
+                <SelectItem value="hi">हिन्दी</SelectItem>
+                <SelectItem value="ta">தமிழ்</SelectItem>
+                <SelectItem value="te">తెలుగు</SelectItem>
+                <SelectItem value="bn">বাংলা</SelectItem>
+                <SelectItem value="gu">ગુજરાતી</SelectItem>
+                <SelectItem value="mr">मराठी</SelectItem>
+                <SelectItem value="kn">ಕನ್ನಡ</SelectItem>
+                <SelectItem value="ml">മലയാളം</SelectItem>
+                <SelectItem value="pa">ਪੰਜਾਬੀ</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
 
           {/* Mobile menu button */}
@@ -81,6 +103,28 @@ const Navigation = () => {
                 {item.label}
               </button>
             ))}
+            
+            {/* Mobile Language Selector */}
+            <div className="px-4 py-2">
+              <Select value={language} onValueChange={setLanguage}>
+                <SelectTrigger className="w-full bg-background/50 border-border">
+                  <Globe className="w-4 h-4 mr-2" />
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="en">English</SelectItem>
+                  <SelectItem value="hi">हिन्दी</SelectItem>
+                  <SelectItem value="ta">தமிழ்</SelectItem>
+                  <SelectItem value="te">తెలుగు</SelectItem>
+                  <SelectItem value="bn">বাংলা</SelectItem>
+                  <SelectItem value="gu">ગુજરાતી</SelectItem>
+                  <SelectItem value="mr">मराठी</SelectItem>
+                  <SelectItem value="kn">ಕನ್ನಡ</SelectItem>
+                  <SelectItem value="ml">മലയാളം</SelectItem>
+                  <SelectItem value="pa">ਪੰਜਾਬੀ</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
         </div>
       </div>

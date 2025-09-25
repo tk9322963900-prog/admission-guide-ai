@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { Send, Bot, User } from 'lucide-react';
+import { Send, Bot, User, Mic, MicOff } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
@@ -21,7 +21,9 @@ const ChatSection = () => {
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [isListening, setIsListening] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const recognitionRef = useRef<any>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -30,6 +32,31 @@ const ChatSection = () => {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  useEffect(() => {
+    // Initialize speech recognition
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+      const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+      recognitionRef.current = new SpeechRecognition();
+      recognitionRef.current.continuous = false;
+      recognitionRef.current.interimResults = false;
+      recognitionRef.current.lang = 'en-US';
+
+      recognitionRef.current.onresult = (event: any) => {
+        const transcript = event.results[0][0].transcript;
+        setInputValue(transcript);
+        setIsListening(false);
+      };
+
+      recognitionRef.current.onerror = () => {
+        setIsListening(false);
+      };
+
+      recognitionRef.current.onend = () => {
+        setIsListening(false);
+      };
+    }
+  }, []);
 
   const sendMessage = () => {
     if (!inputValue.trim()) return;
@@ -48,10 +75,11 @@ const ChatSection = () => {
     // Simulate AI response
     setTimeout(() => {
       const aiResponses = [
-        "That's a great question! Based on your interests, I'd recommend looking into our Computer Science and Engineering programs. Would you like me to provide more details about the eligibility criteria?",
+        "That's a great question! Based on your interests, I'd recommend looking into our Computer Science and Engineering programs (₹1,25,000/year). Would you like me to provide more details about the eligibility criteria?",
         "I can help you with that! For most programs, you'll need to complete your application by the end of this month. Let me guide you through the application process step by step.",
         "Excellent choice! Our scholarship programs can cover up to 75% of tuition fees. I'll need to know more about your academic background to suggest the best options for you.",
         "The admission process typically takes 2-3 weeks after document submission. I can help you track your application status and prepare for any entrance exams if required.",
+        "For Indian students, we offer flexible payment options and EMI facilities. Our courses are designed keeping in mind the Indian education system and job market.",
       ];
 
       const aiMessage: Message = {
@@ -69,6 +97,21 @@ const ChatSection = () => {
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       sendMessage();
+    }
+  };
+
+  const toggleVoiceInput = () => {
+    if (!recognitionRef.current) {
+      alert('Voice recognition is not supported in your browser');
+      return;
+    }
+
+    if (isListening) {
+      recognitionRef.current.stop();
+      setIsListening(false);
+    } else {
+      recognitionRef.current.start();
+      setIsListening(true);
     }
   };
 
@@ -155,6 +198,17 @@ const ChatSection = () => {
                   placeholder="Ask about courses, eligibility, applications, or anything else..."
                   className="flex-1 bg-background/50 border-border focus:border-primary transition-smooth"
                 />
+                <Button 
+                  onClick={toggleVoiceInput}
+                  className={`transition-all duration-300 px-4 ${
+                    isListening 
+                      ? 'bg-destructive hover:bg-destructive/90 text-destructive-foreground' 
+                      : 'bg-secondary hover:bg-secondary/90 text-secondary-foreground'
+                  }`}
+                  title={isListening ? "Stop listening" : "Start voice input"}
+                >
+                  {isListening ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
+                </Button>
                 <Button 
                   onClick={sendMessage}
                   className="bg-gradient-primary hover:shadow-floating transition-all duration-300 px-6"
