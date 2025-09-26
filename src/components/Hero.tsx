@@ -136,63 +136,6 @@ const Hero = ({ onNavigateToChat }: HeroProps) => {
               </div>
             </div>
           </div>
-
-          {/* How It Works Section */}
-          <div className="mt-20 animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
-            <h2 className="text-3xl font-bold text-center text-foreground mb-12">How It Works</h2>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-              <div className="text-center group">
-                <div className="w-16 h-16 rounded-full bg-gradient-primary mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <span className="text-white font-bold text-xl">1</span>
-                </div>
-                <h3 className="font-semibold text-foreground mb-2">Start Chat</h3>
-                <p className="text-sm text-muted-foreground">Begin conversation with our AI agent about your goals</p>
-              </div>
-              <div className="text-center group">
-                <div className="w-16 h-16 rounded-full bg-gradient-primary mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <span className="text-white font-bold text-xl">2</span>
-                </div>
-                <h3 className="font-semibold text-foreground mb-2">Get Matched</h3>
-                <p className="text-sm text-muted-foreground">AI analyzes your profile and suggests best courses</p>
-              </div>
-              <div className="text-center group">
-                <div className="w-16 h-16 rounded-full bg-gradient-primary mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <span className="text-white font-bold text-xl">3</span>
-                </div>
-                <h3 className="font-semibold text-foreground mb-2">Apply Smart</h3>
-                <p className="text-sm text-muted-foreground">Get step-by-step guidance for applications</p>
-              </div>
-              <div className="text-center group">
-                <div className="w-16 h-16 rounded-full bg-gradient-primary mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <span className="text-white font-bold text-xl">4</span>
-                </div>
-                <h3 className="font-semibold text-foreground mb-2">Succeed</h3>
-                <p className="text-sm text-muted-foreground">Track your progress and get admission confirmations</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Popular Colleges */}
-          <div className="mt-20 animate-fade-in-up" style={{ animationDelay: '0.9s' }}>
-            <h2 className="text-2xl font-bold text-center text-foreground mb-8">Trusted by Students at Top Institutions</h2>
-            <div className="flex flex-wrap justify-center items-center gap-8 opacity-60 hover:opacity-80 transition-opacity">
-              <div className="p-4 glass rounded-lg">
-                <span className="font-semibold text-foreground">IIT Delhi</span>
-              </div>
-              <div className="p-4 glass rounded-lg">
-                <span className="font-semibold text-foreground">IIM Bangalore</span>
-              </div>
-              <div className="p-4 glass rounded-lg">
-                <span className="font-semibold text-foreground">AIIMS</span>
-              </div>
-              <div className="p-4 glass rounded-lg">
-                <span className="font-semibold text-foreground">NIT Trichy</span>
-              </div>
-              <div className="p-4 glass rounded-lg">
-                <span className="font-semibold text-foreground">BITS Pilani</span>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
