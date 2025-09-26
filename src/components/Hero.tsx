@@ -11,7 +11,7 @@ const Hero = ({ onNavigateToChat }: HeroProps) => {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="home" className="relative w-full h-full flex items-center justify-center overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 gradient-hero opacity-60" />
       <div className="absolute inset-0">
