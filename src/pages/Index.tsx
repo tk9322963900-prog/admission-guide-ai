@@ -10,6 +10,8 @@ import Footer from '@/components/Footer';
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState('home');
+  
+  console.log('Current activeSection:', activeSection);
 
   const sections = {
     home: <Hero onNavigateToChat={() => setActiveSection('chat')} />,
@@ -20,15 +22,17 @@ const Index = () => {
     contact: <ContactSection />
   };
 
+  console.log('Available sections:', Object.keys(sections));
+
   return (
-    <div className="min-h-screen bg-background overflow-hidden">
+    <div className="min-h-screen bg-background">
       <Navigation activeSection={activeSection} onSectionChange={setActiveSection} />
       
-      <div className="relative w-full h-screen">
+      <div className="relative w-full h-screen pt-16">
         {Object.entries(sections).map(([key, component]) => (
           <div
             key={key}
-            className={`absolute inset-0 w-full h-full transition-all duration-700 ease-in-out transform ${
+            className={`absolute inset-0 top-16 w-full h-full transition-all duration-700 ease-in-out transform ${
               activeSection === key
                 ? 'translate-x-0 opacity-100 scale-100 z-10'
                 : 'translate-x-full opacity-0 scale-95 z-0'
@@ -38,8 +42,6 @@ const Index = () => {
           </div>
         ))}
       </div>
-      
-      <Footer />
     </div>
   );
 };
