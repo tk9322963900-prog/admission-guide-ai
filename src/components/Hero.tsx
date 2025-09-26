@@ -70,8 +70,35 @@ const Hero = ({ onNavigateToChat }: HeroProps) => {
             </Button>
           </div>
 
+          {/* Quick Action Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
+            <div className="group p-6 rounded-2xl glass hover:shadow-floating transition-all duration-300 cursor-pointer">
+              <div className="w-12 h-12 rounded-xl bg-gradient-primary mb-4 flex items-center justify-center group-hover:scale-110 transition-transform">
+                <span className="text-white font-bold">🎓</span>
+              </div>
+              <h3 className="text-lg font-semibold text-foreground mb-2">Browse Courses</h3>
+              <p className="text-sm text-muted-foreground">Explore 500+ courses across different streams and find your perfect match.</p>
+            </div>
+
+            <div className="group p-6 rounded-2xl glass hover:shadow-floating transition-all duration-300 cursor-pointer">
+              <div className="w-12 h-12 rounded-xl bg-gradient-primary mb-4 flex items-center justify-center group-hover:scale-110 transition-transform">
+                <span className="text-white font-bold">📋</span>
+              </div>
+              <h3 className="text-lg font-semibold text-foreground mb-2">Check Eligibility</h3>
+              <p className="text-sm text-muted-foreground">Verify your eligibility for courses with our AI-powered assessment tool.</p>
+            </div>
+
+            <div className="group p-6 rounded-2xl glass hover:shadow-floating transition-all duration-300 cursor-pointer">
+              <div className="w-12 h-12 rounded-xl bg-gradient-primary mb-4 flex items-center justify-center group-hover:scale-110 transition-transform">
+                <span className="text-white font-bold">💰</span>
+              </div>
+              <h3 className="text-lg font-semibold text-foreground mb-2">Fee Calculator</h3>
+              <p className="text-sm text-muted-foreground">Calculate total fees including scholarships and payment plans.</p>
+            </div>
+          </div>
+
           {/* Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
             <div className="text-center">
               <div className="text-3xl font-bold text-foreground mb-2">10K+</div>
               <div className="text-muted-foreground">Students Helped</div>
@@ -83,6 +110,30 @@ const Hero = ({ onNavigateToChat }: HeroProps) => {
             <div className="text-center">
               <div className="text-3xl font-bold text-foreground mb-2">95%</div>
               <div className="text-muted-foreground">Success Rate</div>
+            </div>
+          </div>
+
+          {/* Student Testimonial */}
+          <div className="mt-16 animate-fade-in-up" style={{ animationDelay: '0.7s' }}>
+            <div className="max-w-2xl mx-auto p-8 rounded-2xl glass">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-12 h-12 rounded-full bg-gradient-primary flex items-center justify-center">
+                  <span className="text-white font-bold text-lg">P</span>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-foreground">Priya Sharma</h4>
+                  <p className="text-sm text-muted-foreground">Engineering Student, IIT Delhi</p>
+                </div>
+              </div>
+              <p className="text-muted-foreground italic">
+                "The AI assistant helped me navigate through the complex admission process seamlessly. 
+                Got admission in my dream college with a 40% scholarship!"
+              </p>
+              <div className="flex items-center gap-1 mt-3">
+                {[...Array(5)].map((_, i) => (
+                  <span key={i} className="text-yellow-400">⭐</span>
+                ))}
+              </div>
             </div>
           </div>
         </div>
