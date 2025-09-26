@@ -30,18 +30,9 @@ const Index = () => {
             key={key}
             className={`absolute inset-0 w-full h-full transition-all duration-700 ease-in-out transform ${
               activeSection === key
-                ? 'translate-x-0 opacity-100 scale-100'
-                : key === 'home' && activeSection !== 'home'
-                ? '-translate-x-full opacity-0 scale-95'
-                : activeSection === 'home' && key !== 'home'
-                ? 'translate-x-full opacity-0 scale-95'
-                : activeSection > key
-                ? '-translate-x-full opacity-0 scale-95'
-                : 'translate-x-full opacity-0 scale-95'
+                ? 'translate-x-0 opacity-100 scale-100 z-10'
+                : 'translate-x-full opacity-0 scale-95 z-0'
             }`}
-            style={{
-              zIndex: activeSection === key ? 10 : 1
-            }}
           >
             {component}
           </div>
